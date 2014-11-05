@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>List | Products</title>
+	</head>
+	<body>
+		<h1>Product List in <%= @category.category_name %> </h1>
+
+		<%= link_to "Add new product", new_category_product_path %>
+		<input type="hidden" value="<%= @category.category_id %>">
+		<table>
+			<tr>
+				<th>Product Number</th>
+				<th>Product Name</th>
+				<th>Product Price</th>
+				<th>View</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			<% @category_products.each do |product| %>
+			<tr>
+				<td><%= product.product_id %></td>
+				<td><%= product.product_name %></td>
+				<td><%= product.product_price %></td>
+				<td>View</td>
+				<td>Edit</td>
+				<td>Delete</td>
+			</tr>
+			<% end %>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,133 @@
+
+	<%content_for :title do%>Edit Details | LogicKart<%end%>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    $(".showpassword").each(function(index,input) {
+        var $input = $(input);
+        $('<label class="showpasswordlabel"/>').append(
+            $("<input type='checkbox' class='showpasswordcheckbox' />").click(function() {
+                var change = $(this).is(":checked") ? "text" : "password";
+                var rep = $("<input type='" + change + "' />")
+                    .attr("id", $input.attr("id"))
+                    .attr("name", $input.attr("name"))
+                    .attr('class', $input.attr('class'))
+                    .val($input.val())
+                    .insertBefore($input);
+                $input.remove();
+                $input = rep;
+             })
+        ).append($("<span/>").text("Show password")).insertAfter($input);
+    });
+});
+  </script>
+
+  
+<style type="text/css">
+    .red {  /* for error messages */
+   color: red;
+}
+ 
+input.error {  /* for the error input text fields */
+   border: 1px red inset;
+   padding: 2px;
+}
+ 
+table {
+   border: 0;
+}
+ 
+td {
+   margin: 0;
+   padding: 3px 10px 3px 3px;
+}
+</style>
+ 
+<h1>Edit Details | LogicKart</h1>
+<% if flash[:notice] %>
+    <p class="flash-error"><%= flash[:notice] %></p>
+  <% end %>
+
+<div>
+	<%= form_tag('/userupdate', {:method => :post, :id => 'ADMIN_EDIT'}) do %>
+   <table>
+   <td><input type="hidden" name="User[id]" id="UserID" value= <%= $resp["id"]%> > </td>
+   <td><input type="hidden" name="User[password]" id="UserPassword" value= <%= $resp["password"]%> > </td>
+   <tr>
+    <td><label for="UserFirstName">First Name <abbr title="Required" class="red">*</abbr></label> </td>
+    <td><input type="text" name="User[fname]" id="UserFirstName" required placeholder="Enter first name" value= <%= $resp["fname"]%> > </td>
+    <td id="UserFirstNameError">&nbsp;</td>
+    </tr>
+    <tr>
+     <td><label for="UserMiddleName">Middle Name </label> </td>
+     <td><input type="text" name="User[mname]" id="UserMiddleName"placeholder="Enter middle name" value=<%= $resp["mname"]%> ></td>
+     <td id="UserMiddleNameError">&nbsp;</td>
+    </tr>
+    
+    <tr> 
+        <td><label for="UserLastName">Last Name <abbr title="Required" class="red">*</abbr></label></td>
+        <td><input type="text" name="User[lname]" id="UserLastName" required placeholder="Enter last name" value=<%= $resp["lname"]%> > </td>
+        <td><h5 id="UserLastNameError"></h5></td>
+    </tr>
+    <tr>
+    <td><label for="UserGender">Gender <abbr title="Required" class="red">*</abbr></label> </td>
+    <td>    <select id="UserGender" name="User[gender]" <%= $resp["gender"]%>>
+        <option name="User[gender]" value="000"></option>
+          <option name="User[gender]" value="Male">Male</option>
+          <option name="User[gender]" value="Female">Female</option>
+        </select></td>
+    <td id="UserGenderError">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><label for="UserAddress">Address <abbr title="Required" class="red">*</abbr></label> </td>
+        <td><textarea rows="4" cols="50" id ="UserAddress" name="User[address]" value=<%= $resp["address"]%> required placeholder="Enter residential address"></textarea> </td>
+        <td id="UserAddressError">&nbsp;</td>
+    </tr>
+    <tr> 
+        <td><label for="UserPhone">Phone Number <abbr title="Required" class="red">*</abbr></label></td>
+        <td><input type="text" name="User[phone]" id="UserPhone" required placeholder="Enter phone number" value=<%= $resp["phone"]%> > </td>
+        <td id="UserPhoneError">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><label for="UserEmail">Email Address <abbr title="Required" class="red">*</abbr></label> </td>
+        <td><input type="email" name="User[emailId]" id="UserEmail" required placeholder="Enter valid email address" value=<%= $resp["emailId"]%> ></td>
+        <td id="UserEmailError">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><label for="UserType">Type <abbr title="Required" class="red">*</abbr></label> </td>
+        <td><input type="text" name="User[type]" id="UserType" required placeholder="Enter the user type" value=<%= $resp["type"]%> ></td>
+        <td id="UserTypeError">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><label for="UserStatus">Status <abbr title="Required" class="red">*</abbr></label> </td>
+        <td><input type="text" name="User[status]" id="UserStatus" required placeholder="Enter the user status" value=<%= $resp["status"]%> ></td>
+        <td id="UserStatusError">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Update" id="submit"><a href="/userslist"><input type="submit" value="Back" id="submit"></a></td>
+    </tr>
+    </table>
+  <% end %>
+
+  <script type="text/javascript">
+  var formvalidator = new Validator("ADMIN_EDIT");
+  formvalidator.addValidation("UserFirstName", "req", "Please enter your first name");
+  formvalidator.addValidation("UserFirstName", "alpha", "Please put alphabets only in first name");
+  formvalidator.addValidation("UserFirstName", "maxlen=25");
+  formvalidator.addValidation("UserMiddleName", "alpha");
+  formvalidator.addValidation("UserMiddleName", "maxlen=25");
+  formvalidator.addValidation("UserLastName", "req", "Please enter your last name");
+  formvalidator.addValidation("UserLastName", "alpha", "Please put alphabets only in last name");
+  formvalidator.addValidation("UserLastName", "maxlen=25");
+  formvalidator.addValidation("UserEmail", "req", "Don't leave the email address field blank");
+  formvalidator.addValidation("UserEmail", "maxlen=50", "Please enter a shorter email address");
+  formvalidator.addValidation("UserEmail", "email", "Please enter a valid email address");
+  formvalidator.addValidation("UserPhone", "numeric","Please put digits only in phone number");
+  formvalidator.addValidation("UserPhone", "maxlen=10", "Please put phone number upto 10 digits");
+  formvalidator.addValidation("UserAddress", "maxlen=200", "Please shortern your address");
+  formvalidator.addValidation("UserAddress", "alnum_s", "Please put only alphanumeric characters in address");
+  formvalidator.addValidation("UserGender", "dontselect=000");
+  </script>
+</div>

@@ -1,0 +1,37 @@
+<h1>User Details</h1>
+<hr/>
+<table>
+	<tr>
+		<td>First Name: </td>
+		<td><%= @resposeObj["fname"] %></td>
+	</tr>
+	<tr>
+		<td>Middle Name: </td>
+		<td><%= @resposeObj["mname"] %></td>
+	</tr>
+	<tr>
+		<td>Last Name: </td>
+		<td><%= @resposeObj["lname"] %></td>
+	</tr>
+	<tr>
+		<td>Email Address: </td>
+		<td><%= @resposeObj["emailId"] %></td>
+	</tr>
+	<tr>
+		<td>Residential Address: </td>
+		<td><%= @resposeObj["address"] %></td>
+	</tr>
+	<tr>
+		<td>Gender: </td>
+		<td><%= @resposeObj["gender"] %></td>
+	</tr>
+	<tr>
+		<td>Contact Number: </td>
+		<td><%= @resposeObj["phone"] %></td>
+	</tr>
+ <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
+</table>
+<br>
+<%= link_to "Back", user_index_path %> <br>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%content_for :title do%>Login | LogicKart<%end%>
+  <script type="text/javascript">
+    $(function(){
+    $(".showpassword").each(function(index,input) {
+        var $input = $(input);
+        $('<label class="showpasswordlabel"/>').append(
+            $("<input type='checkbox' class='showpasswordcheckbox' />").click(function() {
+                var change = $(this).is(":checked") ? "text" : "password";
+                var rep = $("<input type='" + change + "' />")
+                    .attr("id", $input.attr("id"))
+                    .attr("name", $input.attr("name"))
+                    .attr('class', $input.attr('class'))
+                    .val($input.val())
+                    .insertBefore($input);
+                $input.remove();
+                $input = rep;
+             })
+        ).append($("<span/>").text("Show password")).insertAfter($input);
+    });
+});
+  </script>
+</head>
+<body>
+<h1>Login at LogicKart</h1>
+<div>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
+</div>
+<div>
+	<%= form_tag( '/user/user_login', {:method => :post, :id => 'USER_LOGIN'}) do %>
+   
+   <table>
+      <tr>
+       <td> <label for="UserEmail">Email id</label> </td>
+      <td>  <input type="email" name="User[emailId]" id="UserEmail" required placeholder="Enter your email address"> </td>
+      </tr>
+    <tr>
+       <td> <label for="UserPassword">Password</label></td>
+        <td><input type="password" name="User[password]" id="UserPassword" required placeholder="Password" class="showpassword"> </td>
+        </tr>
+    
+    <tr>
+        <td><label><a href="/sign_up"><button type="submit" >Sign Up</button></a></label> </td>
+        <td><button type="submit" >Login</button> <label><a href="/forgot_password"><button type="submit" >Forgot Password?</button></a></label></td>
+    </tr>
+    </table>
+  <% end %>
+  <script type="text/javascript">
+    var formvalidator = new Validator("USER_LOGIN");
+    formvalidator.addValidation("UserEmail", "req", "Don't leave the email address field blank");
+    formvalidator.addValidation("UserEmail", "maxlen=50", "Please enter a valid email address upto 50 characters");
+    formvalidator.addValidation("UserEmail", "email", "Please enter a valid email address");
+  </script>
+</div>

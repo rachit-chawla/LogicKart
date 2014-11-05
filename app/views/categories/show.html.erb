@@ -1,0 +1,11 @@
+<p> 
+	<strong>Category ID:</strong>
+	<%= @category.category_id %>
+</p>
+
+<p> 
+	<strong>Category Name:</strong>
+	<%= @category.category_name %>
+	<%= <%= link_to "Back", categories_path %> |
+	<%= <%= link_to "Edit", edit_category_path(@category) %>
+</p>

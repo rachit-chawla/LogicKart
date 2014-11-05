@@ -1,0 +1,56 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<%content_for :title do%>Users List | LogicKart<%end%>
+</head>
+<body>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
+    <hr/>
+
+
+<h1>List of Users at LogicKart</h1>
+
+<div>
+<%= link_to "Add new User", new_user_path %> <br>
+</div>
+<div>
+<table> 
+<thead>
+<tr> 
+  <th>User ID</th>
+  <th>First Name</th>
+  <th>Middle Name</th>
+  <th>Last Name</th>
+  <th>Email Address</th>
+  <th>Gender</th>
+  <th>Address</th>
+  <th>Contact Number</th>
+  <th>View</th>
+  <th>Edit</th>
+  <th>Delete</th>
+</tr>
+</thead>
+<tbody>
+<% @resposeObj1.each do |user| %>
+<tr>
+<td><%= user["id"] %></td>
+<td><%= user["fname"] %></td>
+<td><%= user["mname"] %></td>
+<td><%= user["lname"] %></td>
+<td><%= user["emailId"] %></td>
+<td><%= user["gender"] %></td>
+<td><%= user["address"] %></td>
+<td><%= user["phone"] %></td>
+<td><%= link_to "View", usershow_path(user) %> </td>
+<td><%= link_to "Edit", useredit_path(user)%></td>
+<td><%= link_to "Delete", delete_path(user), method: :post, data: {confirm: "Do you really want to delete this user?"} %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+<div><%= link_to "Back", admin_index_path %></div>
+</body>
+</html>

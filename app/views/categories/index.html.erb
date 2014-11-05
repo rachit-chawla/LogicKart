@@ -1,0 +1,22 @@
+<h1> Listing all Categories </h1>
+<%= link_to "Add new category", new_category_path %>
+<table> 
+<tr> 
+	<th>Category ID</th>
+	<th>Category Name</th>
+	<th>View Products</th>
+	<th>Edit Category</th>
+	<th>Delete Category</th>
+</tr>
+<% @categories.each do |category| %>
+<tr>
+<td><%= category.category_id %></td>
+<td><%= category.category_name%></td>
+<td><%= link_to "View", category_products_path(category) %> </td>
+<td><%= link_to "Edit", edit_category_path(category)%></td>
+<td><%= link_to "Delete", category_path(category), method: :delete, data: {confirm: "Do you really want to delete this category?"} %></td>
+</tr>
+<% end %>
+</table>
+
+<%= link_to "Back", root_path %>

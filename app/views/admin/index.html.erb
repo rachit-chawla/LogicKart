@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<%content_for :title do %>Home | LogicKart<%end%>
+	</head>
+
+	<body>
+	<h1> Home Page | LogicKart </h1>
+	<hr/>
+	<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-info" %>
+  	<% end %>
+  	<hr/>
+ 	<%= link_to "Show Profile Details", ashow_path %> <br>
+ 	<hr/>
+
+ 	<%= link_to "Edit Details", aedit_path %> <br>
+ 	<hr/>
+ 	<%= link_to "List of Users", userslist_path %> <br>
+ 	<hr/>
+  	<%= link_to "Change Password", achange_password_path %> <br>
+  	<hr/>
+
+  	<%= link_to "Log out", logout_path %>
+	</body>
+</html>

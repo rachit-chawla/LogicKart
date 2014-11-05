@@ -1,0 +1,46 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<%content_for :title do%>Register | LogicKart<%end%>
+</head>
+<body>
+<h1>Sign Up at LogicKart</h1>
+
+<div>
+	<%= form_tag({controller: "user", action: "login_form"}, method: "get", class: "register") do %>
+	<%= label_tag(:fname, "First Name: ") %>
+	<%= text_field_tag(:fname) %>
+	<br>
+	<%= label_tag(:mname, "Middle Name: ") %>
+	<%= text_field_tag(:mname) %>
+	<br>
+	<%= label_tag(:lname, "Last Name: ") %>
+	<%= text_field_tag(:lname) %>
+	<br>
+	<%= label_tag(:email, "Email id: ") %>
+	<%= email_field(:email) %>
+	<br>
+	<%= label_tag(:password, "Password: ") %>
+	<%= password_field_tag(:password) %>
+	<br>
+	<%= label_tag(:password_confirmation, "Confirm Password: ") %>
+	<%= password_field_tag(:password_confirmation) %>
+	<br>
+	<%= label_tag(:dob, "Date of Birth: ") %>
+	<%= date_field(:dob) %>
+	<br>
+	<%= label_tag(:gender, "Gender: ") %>
+	<%= radio_button_tag(:gender, "Male") %>
+	<%= radio_button_tag(:gender, "Female") %>
+	<br>
+	<%= label_tag(:address, "Address of Residence: ") %>
+	<%= text_area_tag(:address, "Residential Address", size: "24x6") %>
+	<br>
+	<%= label_tag(:phone, "Contact Number: ") %>
+	<%= telephone_field(:phone) %>
+	<br>
+	<%= submit_tag("Register") %> 
+	<%= button_tag("Reset") %>
+</div>
+</body>
+</html>

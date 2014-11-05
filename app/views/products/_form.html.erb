@@ -1,0 +1,17 @@
+<%= form_tag({controller: "products", action: "create"}, method: "get", class: "login") do %>
+
+	<%= label_tag(:product_id, "Product Number: ") %>
+
+	<%= text_field(:email) %>
+
+	<br>
+
+	<%= label_tag(:password, "Password: ") %>
+
+	<%= password_field_tag(:password) %>
+
+	<br>
+
+	<%= submit_tag("Login") %>
+
+<% end %>

@@ -1,0 +1,38 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<%content_for :title do%>Users List | LogicKart<%end%>
+</head>
+<body>
+<h1>List of Users at LogicKart</h1>
+
+<div>
+<%= link_to "Add new User", user_new_user_path %>
+</div>
+<div>
+<table> 
+<thead>
+<tr> 
+  <th>Category ID</th>
+  <th>Category Name</th>
+  <th>View Products</th>
+  <th>Edit Category</th>
+  <th>Delete Category</th>
+</tr>
+</thead>
+<tbody>
+<% @categories.each do |category| %>
+<tr>
+<td><%= category.category_id %></td>
+<td><%= category.category_name%></td>
+<td><%= link_to "View", category_products_path(category) %> </td>
+<td><%= link_to "Edit", edit_category_path(category)%></td>
+<td><%= link_to "Delete", category_path(category), method: :delete, data: {confirm: "Do you really want to delete this category?"} %></td>
+</tr>
+<% end %>
+</table>
+</tbody>
+</div>
+<div><%= link_to "Back", root_path %></div>
+</body>
+</html>

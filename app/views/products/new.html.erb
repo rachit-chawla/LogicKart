@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New | Product</title>
+	</head>
+	<body>
+		<h1>Adding a new product in <%= @category.category_name %></h1>
+
+	<%= form_tag({controller: "products", action: "create"}, method: "post", class: "login") do %>
+	<p>
+	<label for="Product ID"> Product Number</label>
+	<input type="text" name='product[product_id]' id="Product ID" value="<%= @product['product_id'] %>">
+	</p>
+
+	<p>
+	<label for="Product Name"> Product Name</label>
+	<input type="text" name='product[product_name]' id="Product Name" value="<%= @product['product_name'] %>">
+	</p>
+
+	<p>
+	<label for="Product Price"> Product Price</label>
+	<input type="text" name='product[product_price]' id="Product Price" value="<%= @product['product_price'] %>">
+	</p>
+
+	<p>
+	<input type="hidden" name='product[category_id]' value="<%= @category['category_id'] %>">
+	</p>
+
+	<p>
+		<input type="submit" value="Add Product">
+	</p>
+<% end %>
+
+	</body>
+</html>
